@@ -5,14 +5,14 @@ import 'dart:io';
 import 'arguments.dart';
 import 'exceptions.dart';
 class CommandRunner {
-  CommandRunner({this.onError});
+  CommandRunner({this.onError});//构造函数,接收一个可选的onError参数,当解析命令行参数时发生错误时会调用该函数,如果没有提供onError函数则会抛出异常
 
   final Map<String, Command> _commands = <String, Command>{};//命令名称和命令对象的映射,如help: HelpCommand(), version: VersionCommand()等
 
   UnmodifiableSetView<Command> get commands =>
       UnmodifiableSetView<Command>(<Command>{..._commands.values});
 
-  FutureOr<void> Function(Object)? onError;
+  FutureOr<void> Function(Object)? onError;//当解析命令行参数时发生错误时会调用该函数,如果没有提供onError函数则会抛出异常
 
   Future<void> run(List<String> input) async {
     // [Step 6 update] try/catch added
